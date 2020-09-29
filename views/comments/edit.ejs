@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+    <div class="justify-content-center row">
+        <h1 class="col-md-12 text-center">Edit Comment </h1>
+        <div class="col-xs-8 col-md-6 col-lg-4">
+            <!-- here,campground_slug is just a variable name bc we are getting the id from the edit route -->
+            <form action="/campgrounds/<%= campground_slug %>/comments/<%= comment._id %>?_method=PUT" method="post">
+                <div class="form-group">
+                    <label for="text">Comment</label>
+                    <input type="text" class="form-control" id="text" name="comment[text]" value="<%= comment.text %> ">
+                    <small id="textHelp" class="form-text text-muted">Text goes here</small>
+                </div>
+                <button type="submit" class="btn btn-secondary btn-block">Comment</button>
+            </form>
+            <a href="/campgrounds/<%= campground_slug %>">Go Back</a>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer') %>

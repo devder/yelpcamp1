@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>YelpCamp</title>
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="/">YelpCamp</a>
+        <a class="nav-link nav-item navbar-nav" href="/campgrounds"><i class="fas fa-tree"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <form action="/campgrounds" method="GET" class="form-inline my-2 my-lg-0">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Campground Search..." id=""
+                            class="form-control mr-sm-2" aria-label="Search">
+                        <input type="submit" value="Search" class="btn btn-outline-info my-2 my-sm-0">
+                    </div>
+                </form>
+                <% if (currentUser && currentUser.isAdmin) { %>
+                <li class="nav-item navbar-text">Admin</li>
+                <% } %>
+                <% if(!currentUser){ %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Sign Up</a>
+                </li>
+                <% }else{ %>
+                <li class="nav-item navbar-text">Signed In As <%= currentUser['username'] %> </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+        <% } %>
+    </div>
